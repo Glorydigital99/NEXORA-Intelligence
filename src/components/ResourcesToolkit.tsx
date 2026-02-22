@@ -135,7 +135,7 @@ export default function ResourcesToolkit() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="group cursor-pointer">
             <div className="aspect-video rounded-xl bg-slate-200 dark:bg-slate-800 mb-4 overflow-hidden relative">
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
+              <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent flex items-end p-4">
                 <span className="px-2 py-1 bg-primary text-[10px] font-bold text-white rounded uppercase">Guide</span>
               </div>
             </div>
@@ -146,7 +146,7 @@ export default function ResourcesToolkit() {
           </div>
           <div className="group cursor-pointer">
             <div className="aspect-video rounded-xl bg-slate-200 dark:bg-slate-800 mb-4 overflow-hidden relative">
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
+              <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent flex items-end p-4">
                 <span className="px-2 py-1 bg-emerald-600 text-[10px] font-bold text-white rounded uppercase">Template</span>
               </div>
             </div>
@@ -157,7 +157,7 @@ export default function ResourcesToolkit() {
           </div>
           <div className="group cursor-pointer">
             <div className="aspect-video rounded-xl bg-slate-200 dark:bg-slate-800 mb-4 overflow-hidden relative">
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
+              <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent flex items-end p-4">
                 <span className="px-2 py-1 bg-purple-600 text-[10px] font-bold text-white rounded uppercase">Framework</span>
               </div>
             </div>

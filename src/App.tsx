@@ -16,6 +16,10 @@ import TechnicalSEO from '@/src/components/modules/TechnicalSEO';
 import UXCRO from '@/src/components/modules/UXCRO';
 import MarketPositioning from '@/src/components/modules/MarketPositioning';
 import SecurityTrust from '@/src/components/modules/SecurityTrust';
+
+// --- SUNTIKAN 1: IMPORT FORM AUDIT ---
+import Auditform from '@/src/components/Auditform'; 
+
 import { motion, AnimatePresence } from 'motion/react';
 import { Settings2, Construction } from 'lucide-react';
 
@@ -23,7 +27,6 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>(Page.Landing);
   const [currentModuleSubPage, setCurrentModuleSubPage] = useState<ModuleSubPage>(ModuleSubPage.ContentAuthority);
 
-  // Scroll to top on page change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentPage, currentModuleSubPage]);
@@ -58,7 +61,20 @@ export default function App() {
   const renderContent = () => {
     switch (currentPage) {
       case Page.Dashboard:
-        return <Dashboard setPage={setCurrentPage} setModuleSubPage={setCurrentModuleSubPage} />;
+        // --- SUNTIKAN 2: PASANG FORM DI ATAS DASHBOARD ---
+        return (
+          <div className="space-y-10">
+            <section className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+              <div className="mb-6">
+                <h3 className="text-lg font-black tracking-tight dark:text-white uppercase">Run AI Growth Audit</h3>
+                <p className="text-xs text-slate-500">Analyze any website URL to generate real-time growth intelligence.</p>
+              </div>
+              <Auditform />
+            </section>
+            
+            <Dashboard setPage={setCurrentPage} setModuleSubPage={setCurrentModuleSubPage} />
+          </div>
+        );
       case Page.RevenueRoadmap:
         return <RevenueRoadmap />;
       case Page.ResourcesToolkit:
