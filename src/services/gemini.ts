@@ -1,12 +1,11 @@
 // src/services/gemini.ts
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
-const BASE_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
-
+const BASE_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
+// 1. Fungsi Utama untuk Audit (Jangan sampe ilang bro!)
 export const getGrowthAudit = async (targetUrl: string) => {
   const prompt = `Analyze this website: ${targetUrl}. 
-  Provide a growth audit in JSON format with these exact keys: 
-  "score" (0-100), "summary" (1 sentence), "pros" (array), "cons" (array). 
-  No prose, just JSON.`;
+  Provide a growth audit in JSON format with: "score" (number 0-100), "summary" (string), "pros" (array), "cons" (array). 
+  Just JSON.`;
 
   try {
     const response = await fetch(`${BASE_URL}?key=${API_KEY}`, {
@@ -18,12 +17,30 @@ export const getGrowthAudit = async (targetUrl: string) => {
     });
 
     const data = await response.json();
+
+    if (data.error) {
+      console.error("Google API Error:", data.error.message);
+      return { score: 0, summary: `Error: ${data.error.message}`, pros: [], cons: [] };
+    }
+
+    if (!data.candidates) return null;
+
     const rawText = data.candidates[0].content.parts[0].text;
-    
-    // Membersihkan blok kode markdown jika ada
-    return JSON.parse(rawText.replace(/```json|```/g, ""));
+    const cleanJson = rawText.replace(/```json|```/g, "").trim();
+    return JSON.parse(cleanJson);
   } catch (err) {
-    console.error("Audit failed:", err);
+    console.error("System Audit failed:", err);
     return null;
+  }
+};
+
+// 2. Fungsi Tes untuk deteksi masalah Key (Sesuai permintaan tadi)
+export const testKey = async () => {
+  try {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${API_KEY}`);
+    const data = await response.json();
+    console.log("Daftar Model Lu:", data);
+  } catch (err) {
+    console.error("Test Key Failed:", err);
   }
 };
